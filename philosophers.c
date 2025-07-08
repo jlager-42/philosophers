@@ -3,31 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
+/*   By: jlager <jlager@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:31:04 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/04 09:28:47 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/04 11:51:19 by jlager           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int main(int argc, char **argv)
+// number_of_philosophers time_to_die time_to_eat time_to_sleep [meals_to_full]
+int	main(int argc, char **argv)
 {
 	t_table	table;
 
 	if (argc != 5 && argc != 6)
 	{
-		return_error(R"Wrong input... \n"RESET
-			G"Correct:"RESET B"number_of_philosophers 
-			time_to_die time_to_eat time_to_sleep [meals_to_full]\n" RESET)
+		return_error(R"Wrong input... \n"RESET G"Correct:" RESET 
+			B"number_of_philosophers time_to_die time_to_eat time_to_sleep
+				[meals_to_full]\n" RESET)
 	}
 	if (argc == 5 || argc == 6)
 	{
-		//checks 
+		// other  checks
 		parsing(&table, argv); // fill in table struct
-		
-		start_simulation()
+		data_process(&table);
+		start_simulation(&table);
+		cleanup_and_exit(&table); // if philos are full or one philo dies,
+									// otherwise endless
 		return (0);
 	}
 }
