@@ -6,7 +6,7 @@
 /*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 11:03:06 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/10 11:20:51 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/10 12:34:38 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void initialize(t_table *table)
 {
 	table->end = false;
-	table->number_philosophers = safe_malloc(table-number_philosophers)
+	table->number_philosophers = safe_malloc(sitable->number_philosophers)
 }
