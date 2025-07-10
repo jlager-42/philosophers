@@ -6,7 +6,7 @@
 /*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:35:44 by jlager            #+#    #+#             */
-/*   Updated: 2025/07/10 12:20:38 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/10 12:25:36 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ static void	mutex_error(int status, t_code code)
 {
 	if (status == 0)
 		return ;
-	if (status == EINVAL && (code == LOCK || code == UNLOCK || 
-		code == INIT || code == DESTROY))
+	if (status == EINVAL)
 		return_error("Mutex returning error: value specified is invalid")
-	else if (status == EDEADLOCK)
+	else if (status == EDEADLCK)
 		return_error("Mutex returning error: deadlock, thread blocked")
 	else if (status == EPERM)
 		return_error("Mutex returning error: thread not holding lock")
@@ -51,14 +50,14 @@ static void	thread_error(int status, t_code code)
 		return ;
 	if (status == EAGAIN)
 		return_error("Thread returning error: no recourses to creating thread")
-	else if (status == EDEADLOCK)
-		return_error("Thread returning error:")
 	else if (status == EPERM)
-		return_error("Thread returning error: ")
-	else if (status == ENOMEM)
-		return_error("Thread returning error: ")
-	else if(status == EBUSY)
-		return_error("Thread returning error: ")
+		return_error("Thread returning error: missing permissions")
+	else if (status == EINVAL)
+		return_error("Thread returning error: value specified is invalid")
+	else if (status == ESRCH)
+		return_error("Thread returning error: thread with this ID not found")
+	else if(status == EDEADLK)
+		return_error("Thread returning error: deadlock, thread blocked")
 }
 
 void	safe_mutex(t_mutex *mutex, t_code code)
