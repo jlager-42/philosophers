@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   return_error.c                                     :+:      :+:    :+:   */
+/*   initilizing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlager <jlager@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/04 11:35:44 by jlager            #+#    #+#             */
-/*   Updated: 2025/07/04 11:43:57 by jlager           ###   ########.fr       */
+/*   Created: 2025/07/10 11:03:06 by jasminelage       #+#    #+#             */
+/*   Updated: 2025/07/10 11:20:51 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	return_error(const char *error_msg)
+void initialize(t_table *table)
 {
-	printf(R"❗️%s❗️\n"RESET, error_msg);
-	exit(EXIT_FAILURE);
+	table->end = false;
+	table->number_philosophers = safe_malloc(table-number_philosophers)
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlager <jlager@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:31:04 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/04 11:51:19 by jlager           ###   ########.fr       */
+/*   Updated: 2025/07/10 11:01:54 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	{
 		// other  checks
 		parsing(&table, argv); // fill in table struct
-		data_process(&table);
+		initialize(&table);
 		start_simulation(&table);
 		cleanup_and_exit(&table); // if philos are full or one philo dies,
 									// otherwise endless

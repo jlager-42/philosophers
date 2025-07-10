@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlager <jlager@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:31:00 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/04 11:44:39 by jlager           ###   ########.fr       */
+/*   Updated: 2025/07/10 12:16:14 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,27 @@
 # define RESET "\x1b[0m"
 
 // for more readable code; renaming
-typedef pthread_mutex_t	t_mtx;
+typedef pthread_mutex_t	t_mutex;
+typedef pthread_t		t_thread;
+
+typedef enum e_code
+{
+	LOCK,
+	UNLOCK,
+	INIT,
+	DESTROY,
+	CREATE,
+	JOIN,
+	DETACH,
+} 			t_code;
 
 // for compiling
 typedef struct s_table t_table
 
 	typedef struct s_fork
 {
-	t_mtx				fork;
+	t_mutex				fork;
 	int					fork_id;
-
 }						t_fork;
 
 typedef struct s_philosopher
@@ -62,10 +73,10 @@ typedef struct s_philosopher
 }						t_philosopher;
 
 // ./philosophers 5 800 200 200 [5]
-// number_of_philosophers time_to_die time_to_eat time_to_sleep [meals_to_full]
+// number_philosophers time_to_die time_to_eat time_to_sleep [meals_to_full]
 typedef struct s_table
 {
-	long				number_of_philosophers;
+	long				number_philosophers;
 	long				time_to_die;
 	long				time_to_eat;
 	long				time_to_sleep;
@@ -78,5 +89,10 @@ typedef struct s_table
 
 #endif
 
-// return_error.c
+// utilities.c
 void					return_error(const char *error_msg);
+void					*safe_malloc(size_t bytes);
+
+// parsing.c
+void					parsing(t_table *table, char **argv);
+
