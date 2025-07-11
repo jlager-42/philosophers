@@ -6,7 +6,7 @@
 /*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:31:00 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/10 12:27:52 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/11 11:22:33 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,11 @@ typedef struct s_table
 // utilities.c
 void					return_error(const char *error_msg);
 void					*safe_malloc(size_t bytes);
-void					safe_threads(t_thread *thread, void *(*ops)(void *), 
+
+// thread_mutex.c
+void					safe_thread(t_thread *thread, void *(*ops)(void *), 
 						void *data, t_code code);
+void					safe_mutex(t_mutex *mutex, t_code code);
 
 // parsing.c
 void					parsing(t_table *table, char **argv);
