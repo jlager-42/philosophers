@@ -6,7 +6,7 @@
 /*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:31:00 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/11 11:22:33 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/11 12:02:47 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_table t_table
 	int					fork_id;
 }						t_fork;
 
-typedef struct s_philosopher
+typedef struct s_philosophers
 {
 	int					id;
 	//	bool		dead;
@@ -70,7 +70,7 @@ typedef struct s_philosopher
 	t_table				*table;
 	pthread_t			thread_id;
 
-}						t_philosopher;
+}						t_philosophers;
 
 // ./philosophers 5 800 200 200 [5]
 // number_philosophers time_to_die time_to_eat time_to_sleep [meals_to_full]
@@ -84,7 +84,7 @@ typedef struct s_table
 	long				start;
 	bool				end;
 	t_fork				*forks;
-	t_philosopher		*philosophers;
+	t_philosophers		*philosophers;
 }						t_table;
 
 #endif
