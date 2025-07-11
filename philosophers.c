@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
+/*   By: jlager <jlager@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:31:04 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/10 11:01:54 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/11 14:44:57 by jlager           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	main(int argc, char **argv)
 
 	if (argc != 5 && argc != 6)
 	{
-		return_error(R"Wrong input... \n"RESET G"Correct:" RESET 
-			B"number_of_philosophers time_to_die time_to_eat time_to_sleep
-				[meals_to_full]\n" RESET)
+		return_error(R "Wrong input... \n"
+			RESET G "Correct:"
+			RESET "number_of_philosophers time_to_die time_to_eat"
+			"time_to_sleep [meals_to_full]\n");
 	}
 	if (argc == 5 || argc == 6)
 	{
-		// other  checks
-		parsing(&table, argv); // fill in table struct
+		parsing(&table, argv);
 		initialize(&table);
 		start_simulation(&table);
 		cleanup_and_exit(&table); // if philos are full or one philo dies,

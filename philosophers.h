@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
+/*   By: jlager <jlager@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:31:00 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/11 12:02:47 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/11 14:44:25 by jlager           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef enum e_code
 	CREATE,
 	JOIN,
 	DETACH,
-} 			t_code;
+}						t_code;
 
 // for compiling
 typedef struct s_table t_table
@@ -73,18 +73,18 @@ typedef struct s_philosophers
 }						t_philosophers;
 
 // ./philosophers 5 800 200 200 [5]
-// number_philosophers time_to_die time_to_eat time_to_sleep [meals_to_full]
+// number_of_philosophers time_to_die time_to_eat time_to_sleep [meals_to_full]
 typedef struct s_table
 {
-	long				number_philosophers;
+	long				number_of_philosophers;
 	long				time_to_die;
 	long				time_to_eat;
 	long				time_to_sleep;
 	long				meals_to_full;
 	long				start;
 	bool				end;
-	t_fork				*forks;
-	t_philosophers		*philosophers;
+	t_fork				*fork;
+	t_philosophers		*philosopher;
 }						t_table;
 
 #endif
@@ -94,10 +94,12 @@ void					return_error(const char *error_msg);
 void					*safe_malloc(size_t bytes);
 
 // thread_mutex.c
-void					safe_thread(t_thread *thread, void *(*ops)(void *), 
-						void *data, t_code code);
+void					safe_thread(t_thread *thread, void *(*ops)(void *),
+							void *data, t_code code);
 void					safe_mutex(t_mutex *mutex, t_code code);
 
 // parsing.c
 void					parsing(t_table *table, char **argv);
 
+// initializing.c
+void					initialize(t_table *table);

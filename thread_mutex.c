@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread_mutex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
+/*   By: jlager <jlager@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 11:20:59 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/11 11:21:01 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/11 12:47:54 by jlager           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ static void	mutex_error(int status, t_code code)
 		return_error("Mutex returning error: thread not holding lock");
 	else if (status == ENOMEM)
 		return_error("Mutex returning error: not enough memory");
-	else if(status == EBUSY)
+	else if (status == EBUSY)
 		return_error("Mutex returning error: mutex locked");
 }
-
 
 void	safe_mutex(t_mutex *mutex, t_code code)
 {
@@ -55,12 +54,12 @@ static void	thread_error(int status, t_code code)
 		return_error("Thread returning error: value specified is invalid");
 	else if (status == ESRCH)
 		return_error("Thread returning error: thread with this ID not found");
-	else if(status == EDEADLK)
+	else if (status == EDEADLK)
 		return_error("Thread returning error: deadlock, thread blocked");
 }
 
-void	safe_thread(t_thread *thread, void *(*ops)(void *), 
-		void *data, t_code code)
+void	safe_thread(t_thread *thread, void *(*ops)(void *), void *data,
+		t_code code)
 {
 	if (code == CREATE)
 		thread_error(pthread_create(thread, NULL, ops, data), code);
