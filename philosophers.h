@@ -6,7 +6,7 @@
 /*   By: jlager <jlager@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:31:00 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/11 14:44:25 by jlager           ###   ########.fr       */
+/*   Updated: 2025/07/11 16:18:52 by jlager           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,12 @@ typedef struct s_table
 	long				time_to_eat;
 	long				time_to_sleep;
 	long				meals_to_full;
+	bool				everyone_ready;
 	long				start;
 	bool				end;
 	t_fork				*fork;
 	t_philosophers		*philosopher;
+	t_mutex				table_mutex;
 }						t_table;
 
 #endif
