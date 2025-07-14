@@ -6,7 +6,7 @@
 /*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:31:00 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/14 14:02:23 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/14 15:39:43 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,20 @@ typedef enum 			e_time
 	MICROSECONDS,
 }						t_time;
 
-// for compiling mainly cuz im refferencing within the refference
-typedef struct s_table t_table
+typedef enum			e_philosopher_status
+{
+	TAKE_LEFT_FORK,
+	TAKE_RIGHT_FORK,
+	EATING,
+	SLEEPING,
+	THINKING,
+	DIED,
+}						t_philosopher_status;
 
-	typedef struct s_fork
+// declaration for compiling
+typedef struct			s_table t_table;
+
+typedef struct			s_fork
 {
 	t_mutex				fork;
 	int					fork_id;
@@ -73,6 +83,7 @@ typedef struct			s_philosophers
 	t_fork				*right_fork;
 	t_table				*table;
 	pthread_t			thread_id;
+	t_mutex				*philosopher_mutex;
 }						t_philosophers;
 
 // ./philosophers 5 800 200 200 [5]
@@ -90,6 +101,7 @@ typedef struct			s_table
 	t_fork				*fork;
 	t_philosophers		*philosopher;
 	t_mutex				table_mutex;
+	t_mutex				printing_lock_mutex;
 }						t_table;
 
 // copy_paste.c
@@ -104,8 +116,14 @@ void					initialize(t_table *table);
 // parsing.c
 void					parsing(t_table *table, char **argv);
 
-// start_simulation.c
+// status_printing.c
+void	print_status(t_philosopher_status status, t_philosophers *philosopher, 
+	bool bugs);
 
+// start_simulation.c
+void					*dining(void *data);
+void					wait_for_everyone(t_table *table);
+void					start_simulation(t_table table);
 
 // thread_mutex.c
 void					safe_mutex(t_mutex *mutex, t_code code);
