@@ -6,7 +6,7 @@
 /*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 15:04:00 by jlager            #+#    #+#             */
-/*   Updated: 2025/07/14 15:38:35 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/14 16:08:31 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,43 @@ void	wait_for_everyone(t_table *table)
 		;
 }
 
+static void	eating(t_philosophers *philosopher)
+{
+	safe_mutex(&philosopher->left_fork->fork, LOCK);
+	print_status(TAKE_LEFT_FORK, philosopher, DEBUG_MODE);
+	safe_mutex(&philosopher->right_fork->fork, LOCK);
+	print_status(TAKE_RIGHT_FORK, philosopher, DEBUG_MODE);
+	paste_long(&philosopher->philosopher_mutex, &philosopher->time_last_eat, 
+		get_time(MILISECONDS));
+	philosopher->meals_count++;
+	print_status(EATING, philosopher, DEBUG_MODE);
+	better_usleep(philosopher->table->time_to_eat, philosopher->table);
+	if (philosopher->table->meals_to_full > 0
+		&& philosopher->table->meals_to_full == philosopher->meals_count)
+		paste_bool(&philosopher->philosopher_mutex, &philosopher->full, true);
+	safe_mutex(&philosopher->left_fork->fork, UNLOCK);
+	safe_mutex(&philosopher->right_fork->fork, UNLOCK);
+}
+
+static void	thinking(t_philosophers *philosopher)
+{
+	print_status(THINKIN, philosopher, DEBUG_MODE);
+}
+
 void	*dining(void *data)
 {
 	t_philosophers	*philosopher;
 
 	philosopher = (t_philosophers *)data;
-	wait_for_everyone(philolosopher->table);
+	wait_for_everyone(philosopher->table);
 	
 	while (!finished_simulation())
 	{
-		if (philolosopher->full)
+		if (philosopher->full)
 			break ;
-		eating()
-		
-		sleeping()
+		eating(philosopher);
+		print_status(SLEEPING, philosopher, DEBUG_MODE)
+		better_usleep(philosopher->table->time_to_sleep, philosopher->table);
 
 		thinking()
 	}

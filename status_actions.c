@@ -6,7 +6,7 @@
 /*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:39:53 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/14 15:40:02 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/14 15:54:19 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ static void	eating(t_philosophers *philosopher)
 	
 	paste_long()
 }
+
 
 

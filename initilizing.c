@@ -6,7 +6,7 @@
 /*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 11:03:06 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/14 14:21:08 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/14 15:56:36 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	init_philosophers(t_table *table)
 		philosopher->full = false;
 		philosopher->meals_count = 0;
 		philosopher->table = table;
+		safe_mutex(&philosopher->philosopher_mutex, INIT)
 		assing_fork(philosopher, table->fork, i);
 	}
 }

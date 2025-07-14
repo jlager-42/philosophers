@@ -6,7 +6,7 @@
 /*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:31:00 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/14 15:39:43 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/14 15:44:20 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,17 @@ void					initialize(t_table *table);
 // parsing.c
 void					parsing(t_table *table, char **argv);
 
-// status_printing.c
-void	print_status(t_philosopher_status status, t_philosophers *philosopher, 
-	bool bugs);
 
 // start_simulation.c
 void					*dining(void *data);
 void					wait_for_everyone(t_table *table);
 void					start_simulation(t_table table);
+
+// status_actions.c
+
+// status_printing.c
+void	print_status(t_philosopher_status status, t_philosophers *philosopher, 
+	bool bugs);
 
 // thread_mutex.c
 void					safe_mutex(t_mutex *mutex, t_code code);
