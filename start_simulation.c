@@ -3,25 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   start_simulation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlager <jlager@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 15:04:00 by jlager            #+#    #+#             */
-/*   Updated: 2025/07/11 16:24:25 by jlager           ###   ########.fr       */
+/*   Updated: 2025/07/14 13:46:18 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// ./philosophers 5 800 200 200 [5]
-// number_of_philosophers time_to_die time_to_eat time_to_sleep [meals_to_full]
-void	dining(void *data)
+// similarly like waiting for a signal back in minitalk
+// "spinlock"
+// loops until flag is changed
+void	wait_for_everyone(t_table *table)
+{
+	while(copy_bool(&table->table_mutex, &table->everyone_ready))
+		;
+}
+
+void	*dining(void *data)
 {
 	t_philosophers	*philosopher;
 
 	philosopher = (t_philosophers *)data;
 	wait_for_everyone(philolosopher->table);
+	
+	while (!finished_simulation())
+	{
+		if (philolosopher->full)
+			break ;
+		eating()
+		
+		sleeping()
+
+		thinking()
+	}
+
+	return(NULL);
 }
 
+// ./philosophers 5 800 200 200 [5]
+// number_of_philosophers time_to_die time_to_eat time_to_sleep [meals_to_full]
 void	start_simulation(t_table table)
 {
 	int	i;
@@ -37,9 +59,17 @@ void	start_simulation(t_table table)
 	{
 		while (i < table->number_of_philosophers)
 		{
-			safe_thread(&table->philosopher[i].thread_id, dining,
-				&table->philolosopher[i], CREATE);
+			safe_thread(&table->philosopher[i].thread_id, dining, 
+				&table->philosopher[i], CREATE);
 			i++;
 		}
+	}
+	table->start = get_time(MICROSECONDS);
+	paste_bool(&table->table_mutex, table->everyone_ready, true);
+	i = 0;
+	while(i < table->number_of_philosophers)
+	{
+		safe_thread(table>philosopher[i].thread_id, NULL, NULL, JOIN);
+		i++;
 	}
 }

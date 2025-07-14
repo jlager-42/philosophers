@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlager <jlager@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:31:00 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/11 16:18:52 by jlager           ###   ########.fr       */
+/*   Updated: 2025/07/14 14:02:23 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@
 # define RESET "\x1b[0m"
 
 // for more readable code; renaming
+// mutex = MUTual EXclusion object = "reserves" global variables
+// "global intiger value"
 typedef pthread_mutex_t	t_mutex;
 typedef pthread_t		t_thread;
 
-typedef enum e_code
+typedef enum 			e_code
 {
 	LOCK,
 	UNLOCK,
@@ -45,7 +47,14 @@ typedef enum e_code
 	DETACH,
 }						t_code;
 
-// for compiling
+typedef enum 			e_time
+{
+	SECONDS,
+	MILISECONDS,
+	MICROSECONDS,
+}						t_time;
+
+// for compiling mainly cuz im refferencing within the refference
 typedef struct s_table t_table
 
 	typedef struct s_fork
@@ -54,14 +63,9 @@ typedef struct s_table t_table
 	int					fork_id;
 }						t_fork;
 
-typedef struct s_philosophers
+typedef struct			s_philosophers
 {
 	int					id;
-	//	bool		dead;
-	//	bool		eating;
-	//	bool		sleeping;
-	//	bool		thinking;
-	//	bool		has_fork;
 	long				time_last_eat;
 	long				meals_count;
 	bool				full;
@@ -69,12 +73,11 @@ typedef struct s_philosophers
 	t_fork				*right_fork;
 	t_table				*table;
 	pthread_t			thread_id;
-
 }						t_philosophers;
 
 // ./philosophers 5 800 200 200 [5]
 // number_of_philosophers time_to_die time_to_eat time_to_sleep [meals_to_full]
-typedef struct s_table
+typedef struct			s_table
 {
 	long				number_of_philosophers;
 	long				time_to_die;
@@ -83,25 +86,37 @@ typedef struct s_table
 	long				meals_to_full;
 	bool				everyone_ready;
 	long				start;
-	bool				end;
+	bool				finish;
 	t_fork				*fork;
 	t_philosophers		*philosopher;
 	t_mutex				table_mutex;
 }						t_table;
 
-#endif
+// copy_paste.c
+bool					copy_bool(t_mutex *mutex, bool *value);
+void					paste_bool(t_mutex *mutex, bool *dst, bool value);
+long					copy_long(t_mutex *mutex, long *value);
+void					paste_long(t_mutex *mutex, long *dst, long value);
 
-// utilities.c
-void					return_error(const char *error_msg);
-void					*safe_malloc(size_t bytes);
-
-// thread_mutex.c
-void					safe_thread(t_thread *thread, void *(*ops)(void *),
-							void *data, t_code code);
-void					safe_mutex(t_mutex *mutex, t_code code);
+// initializing.c
+void					initialize(t_table *table);
 
 // parsing.c
 void					parsing(t_table *table, char **argv);
 
-// initializing.c
-void					initialize(t_table *table);
+// start_simulation.c
+
+
+// thread_mutex.c
+void					safe_mutex(t_mutex *mutex, t_code code);
+void					safe_thread(t_thread *thread, void *(*ops)(void *),
+							void *data, t_code code);
+
+// utilities.c
+void					return_error(const char *error_msg);
+void					*safe_malloc(size_t bytes);
+bool					finished_simulation(t_table *table);
+long					get_time(t_time time);
+void					better_usleep(long microseconds, t_table *table);
+
+#endif
