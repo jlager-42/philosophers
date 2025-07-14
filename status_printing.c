@@ -6,7 +6,7 @@
 /*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:14:26 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/14 15:41:16 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/14 16:13:59 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	print_status(t_philosopher_status status, t_philosophers *philosopher,
 		print_bug_warning(status, philosopher, bugs);
 	else if (!finished_simulation(philosopher->table))
 	{
-		if (status == TAKE_LEFT_FORK || status == TAKE_RIGHT_FORK)
-			printf("%-6ld %d has taken a fork 🥄", time_passed, philosopher->id);
-		// if (status == TAKE_LEFT_FORK)
-		// 	printf("%-6ld %d has taken the left fork 🥄", time_passed, philosopher->id);
-		// if (status == TAKE_RIGHT_FORK)
-		// 	printf("%-6ld %d has taken the right fork 🥄", time_passed, philosopher->id);
+		// if (status == TAKE_LEFT_FORK || status == TAKE_RIGHT_FORK)
+		// 	printf("%-6ld %d has taken a fork 🥄", time_passed, philosopher->id);
+		if (status == TAKE_LEFT_FORK)
+			printf("%-6ld %d took left fork 🥄", time_passed, philosopher->id);
+		if (status == TAKE_RIGHT_FORK)
+			printf("%-6ld %d took right fork 🥄", time_passed, philosopher->id);
 		else if (status == EATING)
 			printf("%-6ld %d is eating 🍽️,\n%ld meals eaten 🍕", time_passed, 
 				philosopher->id, philosopher->meals_count);

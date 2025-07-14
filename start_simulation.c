@@ -6,7 +6,7 @@
 /*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 15:04:00 by jlager            #+#    #+#             */
-/*   Updated: 2025/07/14 16:08:31 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/14 16:12:57 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ void	start_simulation(t_table table)
 	if (table->number_of_philosophers == 0)
 		return ;
 	else if (table->number_of_philosophers == 1)
-	{
 		;
-	}
 	else if (table->number_of_philosophers > 1)
 	{
 		while (i < table->number_of_philosophers)

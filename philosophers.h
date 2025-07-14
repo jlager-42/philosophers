@@ -6,7 +6,7 @@
 /*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:31:00 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/14 15:44:20 by jasminelage      ###   ########.fr       */
+/*   Updated: 2025/07/14 16:23:31 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ typedef enum			e_philosopher_status
 // declaration for compiling
 typedef struct			s_table t_table;
 
-typedef struct			s_fork
+typedef struct			s_forks
 {
 	t_mutex				fork;
 	int					fork_id;
-}						t_fork;
+}						t_forks;
 
 typedef struct			s_philosophers
 {
@@ -79,8 +79,8 @@ typedef struct			s_philosophers
 	long				time_last_eat;
 	long				meals_count;
 	bool				full;
-	t_fork				*left_fork;
-	t_fork				*right_fork;
+	t_forks				*left_fork;
+	t_forks				*right_fork;
 	t_table				*table;
 	pthread_t			thread_id;
 	t_mutex				*philosopher_mutex;
@@ -98,7 +98,7 @@ typedef struct			s_table
 	bool				everyone_ready;
 	long				start;
 	bool				finish;
-	t_fork				*fork;
+	t_forks				*fork;
 	t_philosophers		*philosopher;
 	t_mutex				table_mutex;
 	t_mutex				printing_lock_mutex;

@@ -1,16 +1,34 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-AR = ar
-ARFLAGS = rcs
-RM = rm -f
+CFLAGS = -Wall -Werror -Wextra -pthread # -pthread necesary for mutex & threads
 
-NAME = philosophers.a
-SRC = 
-OBJ = $(SRC:.c=.o)
+SRCS = \
+	main.c \
+	parsing.c \
+	initilizing.c \
+	copy_paste.c \
+	thread_mutex.c \
+	status_printing.c \
+	start_simulation.c \
+	utilities.c
+
+OBJS = $(SRCS:.c=.o)
+
+NAME = philosophers
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+%.o: %.c philosophers.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJ) $(TEST_OBJ)
+	rm -f $(OBJS)
+
 fclean: clean
-	$(RM) $(NAME) $(TEST_EXEC)
+	rm -f $(NAME)
+
 re: fclean all
-.PHONY: all clean fclean re test run_test
+
+.PHONY: all clean fclean re

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlager <jlager@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jasminelager <jasminelager@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:31:04 by jasminelage       #+#    #+#             */
-/*   Updated: 2025/07/11 14:44:57 by jlager           ###   ########.fr       */
+/*   Updated: 2025/07/14 16:18:35 by jasminelage      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	main(int argc, char **argv)
 	{
 		parsing(&table, argv);
 		initialize(&table);
-		start_simulation(&table);
-		cleanup_and_exit(&table); // if philos are full or one philo dies,
+		start_simulation(table);
+//		cleanup_and_exit(&table); // if philos are full or one philo dies,
 									// otherwise endless
 		return (0);
 	}
